@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+{%  load static %}
+<head>
+    <meta charset="utf-8">
+    <title>Skin Cancer</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/static/img/seed 1.jpg" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/twentytwenty/twentytwenty.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <style>
+        .topbar, .navbar {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure they are on top of other content */
+        }
+
+        .topbar {
+            top: 0;
+            z-index: 999; /* Slightly lower z-index than navbar */
+        }
+
+        .navbar {
+            top: -40px; /* Adjust based on the height of the topbar */
+        }
+
+        .content {
+            padding-top: 120px; /* Adjust based on the combined height of the topbar and navbar */
+        }
+
+    </style>
+</head>
+
+<body>
+    
+
+    {% if user.is_authenticated %}
+   <!-- Topbar Start -->
+<div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block topbar">
+    <div class="row gx-0">
+        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <!-- Content for the left side of the topbar (if any) -->
+            </div>
+        </div>
+       
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+    <a href="index.html" class="navbar-brand p-0">
+        <h1 class="m-0 text-primary"> <img src =''></i> SKIN DISEASE </h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+            {% if user.is_authenticated %}
+            <a href="{% url 'users-home' %}" class="nav-item nav-link active">Home</a>
+            <!--<a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>-->
+            <a href="{% url 'model' %}" class="nav-item nav-link">Model</a>
+            <a href="{% url 'Database' %}" class="nav-item nav-link">Database</a>
+            <a href="{% url 'logout_view' %}" class="nav-item nav-link">LogOut</a>
+            <h5  class="nav-item nav-link" style="margin-top: -1px; margin-left: 380px; color: maroon;">Welcome to: {{ user.username.title|default:'Guest' }}</h5>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+{% endif %}
+
+    
+    <!-- Full Screen Search End -->
+
+    {% if user.is_authenticated %}
+    <link rel="canonical" href="https://www.digitalmedia.nyc/" />
+    <link rel="stylesheet" href="https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/flexslider.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/imagesloaded.pkgd.min.js"></script>
+    <script src="https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/typed.js"></script>
+    <script src="https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/jquery.flexslider-min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNKpLeG1iTYatnrYPmzt3A0QNWAsj0Z_A&amp;sensor=false"></script>
+<script src="https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/enquire.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/ScrollToPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.min.js"></script>
+    <style>
+  
+@font-face {
+    font-family: 'Sofia Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: local('Sofia Pro Light'), local('SofiaProLight-webfont'), url(https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/SofiaProLight-webfont.woff) format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Sofia Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Sofia Pro Regular'), local('SofiaProRegular-webfont'), url(https://s3.us-east-2.amazonaws.com/vitamindigitalmediaassets/SofiaProRegular-webfont.woff) format('woff');
+    }
+    
+    /* Main CSS */
+    
+    html {
+      height: 100%;
+    }
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 90px 0 0;
+      font-family: "Sofia Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #444444;
+      background-color: #ffffff;
+    }
+    h2, h3 {
+      font-weight: 400;
+    }
+    h3 {
+      font-size: 28px;
+    }
+    .lead {
+      font-size: 24px;
+    }
+    .logged-in {
+      margin-top: 32px;
+    }
+    
+    .no-js .loader-wrapper {
+      display: none;
+    }
+    
+    .loader-wrapper {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2000;
+    }
+    
+    .loader-wrapper > .loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 2001;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .loader-wrapper > .loader-section {
+        position: fixed;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 2000;
+        background: #fff;
+    }
+    
+    .loader-wrapper > .loader-section.loader-section-left {
+        left: 0;
+    }
+    
+    .loader-wrapper > .loader-section.loader-section-right {
+        right: 0;
+    }
+    
+    .loaded .loader-wrapper > .loader {
+        opacity: 0;
+        transition: all 0.3s ease-out;
+    }
+    
+    .loaded .loader-wrapper > .loader-section {
+        transition: all 0.3s 0.3s ease-out;
+    }
+    
+    .loaded .loader-wrapper > .loader-section.loader-section-left {
+        -webkit-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+    
+    .loaded .loader-wrapper > .loader-section.loader-section-right {
+        -webkit-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    
+    .loaded .loader-wrapper {
+        visibility: hidden;
+        -webkit-transform: translateY(-100%);
+        -ms-transform: translateY(-100%);
+        transform: translateY(-100%);
+        transition: all 0.3s 0.6s ease-out
+    }
+    
+    
+    .container.slideshow {
+      padding-top: 10px;
+    }
+    h2 {
+      font-weight: normal;
+    }
+    .flexslider {
+      border: none;
+      box-shadow: none;
+    }
+    .main-intro {
+      display: inline-block;
+      margin-bottom: 2em;
+      font-size: 24px;
+    }
+    .main-intro-typed {
+      display: inline;
+    }
+    .main-heading {
+      display: inline;
+      font-size: 32px;
+    }
+    @media (min-width: 992px) {
+      .container.slideshow {
+        padding-top: 40px;
+      }
+      .main-intro {
+        padding-top: 78px;    
+      }
+      .main-heading {
+        font-size: 28px;
+      }
+      .slideshow h2 {
+        padding-top: 24px;
+        font-size: 28px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .main-intro {
+        padding-top: 90px;   
+      }
+      .main-heading {
+        font-size: 34px;
+      }
+      .slideshow h2 {
+        padding-top: 78px;
+        font-size: 34px;
+      }
+    }
+    .typed-cursor {
+        opacity: 1;
+        -webkit-animation: blink 0.7s infinite;
+        -moz-animation: blink 0.7s infinite;
+        animation: blink 0.7s infinite;
+    }
+    @keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    @-webkit-keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    @-moz-keyframes blink{
+        0% { opacity:1; }
+        50% { opacity:0; }
+        100% { opacity:1; }
+    }
+    .copy {
+      margin-bottom: 2em;
+    }
+    .orange {
+      color: #ff2d00;
+    }
+    .full-width {
+      max-width: 100%;
+    }
+    .pale-orange-bg,
+    .gray-bg {
+      padding: 32px 0;
+    }
+    .portfolio {
+      padding: 32px 15px;
+    }
+    .pale-orange-bg {
+      background: #fff9e7;
+    }
+    .services h2 {
+      font-size: 34px;
+    }
+    .service-title {
+      text-align: center;
+    }
+    .service {
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .service-info {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        margin-left: 50%;
+      }
+    }
+    .service-price {
+      font-size: 28px;
+    }
+    .services .col-md-8 {
+      margin-bottom: 32px;
+    }
+    @media (min-width: 992px) {
+      .services .col-md-8 {
+        margin-bottom: 0;
+      }
+    }
+    .offer h3 {
+      margin-top: 36px;
+    }
+    @media (min-width: 992px) and (max-width: 1199px) {
+      .offer h5 {
+        margin-top: 21px;
+        margin-bottom: 21px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .offer h5 {
+        margin-top: 13px;
+        margin-bottom: 13px;
+      }
+    }
+    .services .orange li span,
+    .about .orange li span {
+      color: #444444;
+    }
+    .col-md-4.info-sidebar {
+      padding: 1em;
+    }
+    .services .info-sidebar {
+      background: #eee;
+    }
+    @media (min-width: 992px) {
+      .col-md-4.info-sidebar {
+        margin-top: 11px;
+      }
+    }
+    h5 {
+      line-height: 1.5;
+      font-weight: 600;
+    }
+    .why-mobile-friendly > h5 {
+      margin-top: 13px;
+    }
+    .portfolio .row {
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+    .portfolio .col-sm-4 {
+      margin: 0 15px 30px;
+    }
+    @media (min-width: 768px) {
+      .portfolio .col-sm-4 {
+        margin: 0;
+      }
+    }
+    .portfolio .item {
+      height: 57.2%;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 3px rgba(0,0,0,0.13), 0 0 8px rgba(0,0,0,0.11);
+    }
+    .link-to-client-site {
+      display: block;
+    }
+    .portfolio img {
+      max-width: 100%;
+    }
+    .portfolio .description {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #999;
+      /*#80c4ff;*/
+      background: rgba(153, 153, 153, 0.9);
+      height: 100%;
+      padding: 1em;
+      color: #fff;
+    }
+    .portfolio .item h4 {
+      border-left: 0.5em solid #ff2d00;
+      padding-left: 0.5em;
+      margin-top: 0.5em;
+    }
+    .gray-bg {
+      background: #eee;
+    }
+    .about h2 {
+      margin-top: 26px;
+      margin-bottom: 16px;
+    }
+    .about .lead {
+      margin-bottom: 16px;
+    }
+    .social-buttons {
+      margin-top: 15px;
+    }
+    .social-button {
+      width: 50px;
+      height: 50px;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin-right: 10px;
+      background: #fff;
+      font-size: 24px;
+      color: #444;
+      transition: all 0.35s ease;
+    }
+    .social-button:hover,
+    .social-button:focus {
+      background: #444;
+      color: #fff;
+      text-decoration: none;
+    }
+    @media (min-width: 992px) {
+      .about .info-sidebar {
+        margin-top: 12px;
+      }
+    }
+    .capabilities ul {
+      padding-left: 0;
+    }
+    .capabilities ul:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    .capabilities li {
+      width: 33.33%;
+      height: 119px;
+      float: left;
+      list-style: none;
+      position: relative;
+      text-align: center;
+    }
+    @media (min-width: 992px) and (max-width: 1199px) {
+      .capabilities li {
+        height: 97px;
+      }
+    }
+    .capabilities li:nth-child(2n + 1) {
+      background: #fff;
+    }
+    .capabilities li:nth-child(2n) {
+      background: #ddd;
+    }
+    .capabilities li > span {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    #contact {
+      position: relative;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      z-index: 99;
+    }
+    .contact-info,
+    #contact .textwidget {
+      background: #fff;
+      position: absolute;
+      right: 0;
+      z-index: 2000000;
+    }
+    .contact-info {
+      width: 100%;
+      padding: 2em;
+      top: 0;
+    }
+    .contact-info h2 {
+      margin-top: 0;
+      font-size: 32px;
+    }
+    .contact-info p {
+      margin-bottom: 0;
+    }
+    #contact .textwidget {
+      top: 200px;
+      width: 100%;
+      padding: 2em;
+    }
+    @media (min-width: 330px) {
+      #contact .textwidget {
+        top: 150px;
+      }
+    }
+    @media (min-width: 520px) {
+      .contact-info,
+      #contact .textwidget {
+        width: 520px;
+      }
+    }
+    @media (min-width: 1260px) {
+      .contact-info {
+        top: 8%;
+        left: 8%;
+        right: auto;
+      }
+      #contact .textwidget {
+        top: 8%;
+        right: 8%;
+      }
+    }
+    form p {
+      position: relative;
+      width: 100%;
+      clear: right;
+    }
+    form p i.fa {
+      position: absolute;
+      left: -1.5em;
+      top: 11px;
+    }
+    form p i.fa.fa-check {
+      color: #007800;
+      left: auto;
+      right: -1.5em;
+    }
+    input,
+    textarea {
+      width: 100%;
+      float: right;
+      clear: right;
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+      border: 2px solid #999;
+    }
+    textarea {
+      height: 9em;
+    }
+    #submit {
+      width: 100%;
+      border: 3px solid #ff2d00;
+      padding: 1em 0;
+      color: #ff2d00;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      background: transparent;
+      transition: background-color 0.3s ease;
+    }
+    #submit:hover {
+      background: #fff3d7;
+    }
+    .response-output {
+      margin: 0;
+    }
+    .error {
+      color: #f44336;
+    }
+    .success {
+      color: #4caf50;
+    }
+    footer {
+      background: #eee;
+      padding: 4em 0 5em;
+      font-size: 0.75em;
+    }
+    #wpadminbar {
+      z-index: 9999999;
+    }
+    
+    .content-area-404 {
+      height: calc(100vh - 233px);
+      background: #fff9dd;
+    }
+    
+    .home-link, 
+    .home-link:hover, 
+    .home-link:focus {
+      color: #ff2d00;
+    } 
+    
+    .home-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 24px;
+    }
+    
+    </style>
+
+    <!--<div class="home" itemscope itemtype="http://schema.org/ProfessionalService" data-spy="scroll" data-target=".navbar-collapse" data-offset="110">
+        <div class="loader-wrapper">
+            <img src="https://www.ranklogos.com/wp-content/uploads/2016/09/skin-disease-and-treatment-Logo.png" alt="Vitamin Digital Media Logo" class="loader">
+            <div class="loader-section loader-section-left"></div>
+            <div class="loader-section loader-section-right"></div>
+          </div>
+         
+            <div id="home" class="container slideshow">
+            <div class="row">
+              <div class="col-md-4 main-intro">
+                <div class="main-intro-typed">
+                    
+                  <div class="main-intro-strings" itemprop="name"><p><span class="main-heading"><span class="orange">Skin Disease</span> Classifications</span><br>Some of the most common skin diseases include: Acne, blocked skin follicles that lead to oil, bacteria and dead skin buildup in your pores.</p></div>
+                  
+                </div>
+              </div>
+              <div class="col-md-8 flexslider">
+                <ul class="slides">
+                    <li><img src="https://img.freepik.com/free-vector/flat-woman-face-with-skin-diseases-rashes-acne-dermatology-problems-dermatologist-cosmetology-doctor-with-magnifier-glass-examining-huge-female-head-with-facial-dermatitis-redness-pimples_88138-877.jpg" alt="newportlaworr"></li>
+                    <li><img src="https://img.freepik.com/free-vector/flat-hand-drawn-oily-skin-problems-infographic_52683-56408.jpg" alt="Janet Ogle"></li>
+                    <li><img src="https://img.freepik.com/premium-vector/skin-problems-infographics-woman-set-most-common-skin-problems-should-take-care-acne_106796-1774.jpg" alt="Bridge22"></li>
+                    <li><img src="https://i.pinimg.com/originals/61/f2/9a/61f29a2ff6126e3bf1cbdc526a1eb66b.jpg" alt="Shaarei Tikvah"></li>
+                    <li><img src="https://vedicline.com/wp-content/uploads/2021/11/symptoms-of-skin-diseases-1024x512.jpg" alt="The Roosevelt Doctor"></li>
+                    <li><img src="https://img.freepik.com/premium-vector/psoriasis-infographic-human-skin-infection-psoriasis-diagnosis-vector-medical-pictures-care-skin-human-dermatitis-disease-inflammation-illustration_80590-11416.jpg" alt="Milton Cleaners"></li>
+                </ul>
+              </div>
+            </div>
+          </div>/container slideshow 
+      
+          
+          
+      </div>-->
+
+<script>
+    (function($) {
+        $(function() {
+          var VDMApp = (function() {
+            var win = $(window);
+            var page = $("html,body");
+            var scrollOffset = -95;
+            var controller;
+      
+            var addLoadedClassOnImagesLoaded = function addLoadedClassOnImagesLoaded() {
+              $('.slideshow').imagesLoaded()
+                .done(function(instance) {
+                  $('body').addClass('loaded');
+                })
+                .fail(function() {
+                  console.warn('all images loaded, at least one is broken');
+                  $('body').addClass('loaded');
+                });
+            };
+      
+            var initTyped = function initTyped() {
+              $('.main-intro-typed').typed({
+                stringsElement: $('.main-intro-strings'),
+                backDelay: 1000,
+              });
+            };
+      
+            var initFlexslider = function initFlexslider() {
+              $('.flexslider').flexslider({
+                slideshowSpeed: 4500,
+                animationSpeed: 500,
+                controlNav: false,
+                directionNav: false
+              });
+            };
+      
+            // Open external links in new tabs; credit: http://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
+            var openExternalLinksInNewTabs = function openExternalLinksInNewTabs() {
+              $('a').each(function() {
+                var a = new RegExp('/' + window.location.host + '/');
+                if(!a.test(this.href)) {
+                  $(this).click(function(event) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      window.open(this.href, '_blank');
+                  });
+                }
+              });
+            };
+      
+            var initLocalScroll = function initLocalScroll() {
+              $('.nav li > a').on('click', function(e) {
+                e.preventDefault();
+                var hash = e.target.hash;
+                TweenMax.to(window, 0.5, {scrollTo: {y: hash, offsetY: 91}});
+                $('.nav li').removeClass('active');
+                $(this).parent('li').addClass('active');
+              });
+            };
+            
+            var resetActiveClassOnLoad = function resetActiveClassOnLoad() {
+              // Fix for what seems to be Firefox clicking the last nav link on load in Codepen
+              setTimeout(function() {
+                $('.nav li:first-of-type > a').click();
+              }, 500);
+            };
+      
+            var enableScrollMagic = function enableScrollMagic() {
+              if (!Modernizr.touch) {
+                controller = new ScrollMagic.Controller();
+                var scene1 = new ScrollMagic.Scene({
+                  duration: 800
+                }).setTween('.copy', {
+                  autoAlpha: 0,
+                  y: 120
+                });
+      
+                var fromLeftVars = {
+                  x: -80,
+                  autoAlpha: 0
+                };
+      
+                var fromRightVars = {
+                  x: 80,
+                  autoAlpha: 0
+                };
+      
+                var servicesOptions = {
+                  offset: 120,
+                  triggerElement: '#services',
+                  triggerHook: 'onEnter'
+                };
+      
+                var offerTween = TweenMax.from('.offer', 0.8, fromLeftVars);
+                var wpTween = TweenMax.from('.why-mobile-friendly', 0.8, fromRightVars);
+                var scene2 = new ScrollMagic.Scene(servicesOptions).setTween(offerTween);
+                var scene3 = new ScrollMagic.Scene(servicesOptions).setTween(wpTween);
+      
+                var fromBottomVars = {
+                  y: 30,
+                  autoAlpha: 0
+                };
+      
+                var tl1 = new TimelineMax();
+                var pRow1Options = {
+                  offset: 50,
+                  triggerElement: '.p-row1',
+                  triggerHook: 'onEnter'
+                };
+      
+                var item1Tween = TweenMax.from('.item1', 0.25, fromBottomVars);
+                var item2Tween = TweenMax.from('.item2', 0.25, fromBottomVars);
+                var item3Tween = TweenMax.from('.item3', 0.25, fromBottomVars);
+                tl1.add(item1Tween);
+                tl1.add(item2Tween);
+                tl1.add(item3Tween);
+                var scene4 = new ScrollMagic.Scene(pRow1Options).setTween(tl1);
+                var tl2 = new TimelineMax();
+                var pRow2Options = {
+                  offset: 50,
+                  triggerElement: '.p-row2',
+                  triggerHook: 'onEnter'
+                };
+      
+                var item4Tween = TweenMax.from('.item4', 0.25, fromBottomVars);
+                var item5Tween = TweenMax.from('.item5', 0.25, fromBottomVars);
+                var item6Tween = TweenMax.from('.item6', 0.25, fromBottomVars);
+                tl2.add(item4Tween);
+                tl2.add(item5Tween);
+                tl2.add(item6Tween);
+                var scene5 = new ScrollMagic.Scene(pRow2Options).setTween(tl2);                
+                var tl3 = new TimelineMax();
+                var pRow3Options = {
+                  offset: 50,
+                  triggerElement: '.p-row3',
+                  triggerHook: 'onEnter'
+                };
+      
+                var item7Tween = TweenMax.from('.item7', 0.25, fromBottomVars);
+                var item8Tween = TweenMax.from('.item8', 0.25, fromBottomVars);
+                var item9Tween = TweenMax.from('.item9', 0.25, fromBottomVars);
+                tl3.add(item7Tween);
+                tl3.add(item8Tween);
+                tl3.add(item9Tween);
+                var scene6 = new ScrollMagic.Scene(pRow3Options).setTween(tl3);          
+                var aboutOptions = {
+                  offset: 120,
+                  triggerElement: '#about',
+                  triggerHook: 'onEnter'
+                };
+      
+                var aboutTween = TweenMax.from('.about-animated', 0.8, fromLeftVars);
+                var capabilitiesTween = TweenMax.from('.capabilities', 0.8, fromRightVars);
+                var scene7 = new ScrollMagic.Scene(aboutOptions).setTween(aboutTween);
+                var scene8 = new ScrollMagic.Scene(aboutOptions).setTween(capabilitiesTween);          
+                var pinOptions = {
+                  duration: 130,
+                  offset: -90,
+                  triggerElement: '#map',
+                  triggerHook: 'onLeave'
+                };
+      
+                var scene9 = new ScrollMagic.Scene(pinOptions).setPin('.contact-info');
+                var scene10 = new ScrollMagic.Scene(pinOptions).setPin('#contact .textwidget');
+                controller.addScene([
+                  scene1,
+                  scene2,
+                  scene3,
+                  scene4,
+                  scene5,
+                  scene6,
+                  scene7,
+                  scene8,
+                  scene9,
+                  scene10
+                ]);
+              }
+            };
+      
+            var disableScrollMagic = function disableScrollMagic() {
+              if (controller) {
+                controller.destroy(true);
+                TweenMax.set('*', {
+                  autoAlpha: 1,
+                  x: 0,
+                  y: 0
+                });
+              }
+            };
+      
+            var enableOrDisableScrollMagic = function enableOrDisableScrollMagic() {
+              enquire.register("screen and (min-width: 1260px)", {
+                match : function() {
+                  enableScrollMagic();
+                },  
+                unmatch : function() {
+                  disableScrollMagic();
+                }
+              });
+            };
+      
+            var toggleDescriptionOnHover = function toggleDescriptionOnHover() {
+              $('.item').find('.description').hide();
+              $('.item').on('mouseenter', function() {
+                $(this).find('.description').fadeIn();
+              }).on('mouseleave', function() {
+                $(this).find('.description').fadeOut();
+              });
+            };
+      
+            
+            var handleSubmit = function handleSubmit() {
+              $('.contact-form').on('submit', function(e) {
+                e.preventDefault();
+                var name = $('.your-name').val();
+                var email = $('.your-email').val();
+                var subject = $('.your-subject').val();
+                var message = $('.your-message').val();
+                emailjs.send('mailgun', 'codepen_portfolio_contact_form',{
+                  name: name, 
+                  email: email,
+                  subject: subject,
+                  message: message
+                })
+                  .then(function(response) {
+                    $('.response-output').addClass('success')
+                      .html('Your message was sent successfully.');
+                  }, function(err) {
+                    $('.response-output').addClass('error')
+                      .html('Sorry, there was an error in sending your message.');
+                  });
+              });
+            };
+      
+            return {
+              init: function() {
+                addLoadedClassOnImagesLoaded();
+                initTyped();
+                initFlexslider();
+                openExternalLinksInNewTabs();
+                initLocalScroll();     
+                resetActiveClassOnLoad();
+                enableOrDisableScrollMagic();
+                toggleDescriptionOnHover();          
+                initGoogleMapOnWindowLoad();
+                handleSubmit();
+              },
+            };
+          })(); 
+      
+          VDMApp.init();        
+        });
+      })(jQuery);
+</script>
+
+
+
+    
+    {% else %}
+
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+      }
+      
+      html{
+        background-color:#fff;
+        color:#555;
+        font-family: 'Lato', 'Arial','sans-serif';
+        font-weight:300;
+        font-size:20px;
+        text-rendering: optimizeLegibility;
+      }
+      
+      .row{
+        max-width: 1140px;
+        margin: 0 auto;
+      }
+      
+      
+      header{
+        background-image:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.7)),url(https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_767624_17030276041815507.png);
+        background-size:cover;
+        background-position:center;
+        height:100vh;
+      }
+      
+      h1{
+        margin:0;
+        margin-bottom:20px;
+        color:#fff;
+        font-size:240%;
+        font-weight:300;
+        text-transform:uppercase;
+        letter-spacing:1px;
+        word-spacing:4px;
+        text-shadow: 2px 2px 9px rgba(0, 0, 10, .8);
+      }
+      
+      .hero-text-box{
+        position:absolute;
+        width:1140px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+      
+      .btn:link,.btn:visited{
+        display:inline-block;
+        padding: 10px 30px;
+        font-weight:300;
+        text-decoration:none;
+        border-radius:30px;
+        color:#fff;
+      }
+      
+      .btn:hover,.btn:active{
+        background-color:#e74c3c;
+        color: black;
+        border: 2px solid #e74c3c;
+        transition:background-color .3s;
+      }
+      
+      .btn-full:link,.btn:visited{
+        background-color:#e74c3c;
+      }
+      
+      .btn-ghost:link,.btn:visited{
+        border: 2px solid #e74c3c;
+      }
+      
+      
+      .logo{
+        height: 105px;
+        width:auto;
+        float:left;
+        margin-top:20px;
+      }
+      
+      
+      .main-nav{
+        float:right;
+        list-style:none;
+        margin-top:55px;
+      }
+      
+      .main-nav li{
+        display: inline-block;
+        margin-left:40px;
+      }
+      
+      .main-nav li a:link, .main-nav li a:visited{
+        color: #fff;
+        text-decoration:none;
+        text-transform:uppercase;
+        font-size: 90%;
+        border-bottom: 2px solid transparent;
+        transition:border-bottom .2s;
+        padding: 5px 0;
+        text-shadow: 2px 2px 9px rgba(0, 0, 10, .8);
+      
+      }
+      
+      .main-nav li a:hover, .main-nav li a:active{
+        border-bottom: 2px solid #e74c3c;
+        
+      }
+      
+      
+      
+      @media only screen and (max-width: 1140px) {
+        .hero-text-box{
+        position:absolute;
+        width:940px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+        .row{
+            width:940px;
+        }
+      }
+      
+      
+      @media only screen and (max-width: 960px) {
+        .hero-text-box{
+        position:absolute;
+        width:840px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+        .row{
+            width:840px;
+        }
+      }
+      
+      
+      @media only screen and (max-width: 960px) {
+        .hero-text-box{
+        position:absolute;
+        width:740px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+        .row{
+            width:740px;
+        }
+        h1{
+          font-size:200%;
+        }
+      }
+      
+      
+      @media only screen and (max-width: 740px) {
+        .hero-text-box{
+        position:absolute;
+        width:640px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+        .row{
+            width:640px;
+        }
+        h1{
+          font-size:180%;
+        }
+        
+      .btn:link,.btn:visited{
+        display:inline-block;
+        padding: 8px 15px;
+        font-weight:300;
+        text-decoration:none;
+        border-radius:30px;
+        color:#fff;
+        font-size:16px;
+      }
+      }
+      
+      
+      @media only screen and (max-width: 640px) {
+        .hero-text-box{
+        position:absolute;
+        width:540px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+        .row{
+            width:540px;
+        }
+        h1{
+          font-size:150%;
+        }
+        
+        .logo{
+          height:50px;
+        }
+        
+      .btn:link,.btn:visited{
+        display:inline-block;
+        padding: 8px 15px;
+        font-weight:300;
+        text-decoration:none;
+        border-radius:30px;
+        color:#fff;
+        font-size:16px;
+      }
+      }
+      
+      
+      @media only screen and (max-width: 430px) {
+        .hero-text-box{
+        position:absolute;
+        width:340px;
+        top:60%;
+        left:50%;
+        transform:translate(-50%, -50%);
+      }
+        .row{
+            width:340px;
+        }
+        h1{
+          font-size:105%;
+        }
+        
+        .logo{
+          height:100px;
+          position:absolute;
+          top: 26%;
+          left:0;
+        }
+        
+      .btn:link,.btn:visited{
+        display:inline-block;
+        padding: 8px 15px;
+        font-weight:300;
+        text-decoration:none;
+        border-radius:30px;
+        color:#fff;
+        font-size:12px;
+      }
+        
+        .main-nav li{
+        display: inline-block;
+        margin-left:10px;
+      }
+        
+        .main-nav{
+        float:right;
+        list-style:none;
+        margin-top:15px;
+      }
+        
+      }
+</style>
+
+
+    <header>
+        <nav>
+            <div class="row">
+                
+                
+            </div>
+        </nav>
+        <h1 style="font-size: 30px; color: rgb(144, 192, 255);">Artificial Intelligence</h1>
+        <div class="hero-text-box">
+          <h1>Skin Disease<br>Classifications
+          </h1>
+            
+            <a class="btn btn-ghost" href="{% url 'users-register' %}">Create Account</a>
+        </div>
+      </header>
+    
+    {% endif %}
+    <!-- Carousel End -->
+
+
+   
+
+    <!-- About Start -->
+    {% if user.is_authenticated %}
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title mb-4">
+                        <!--<h5 class="position-relative d-inline-block text-primary text-uppercase">About Us</h5>-->
+                        <h1 class="display-5 mb-0">Understanding Skin Cancer</h1>
+                    </div>
+                    <h4 class="text-body fst-italic mb-4">Skin cancer is one of the most common types of cancer and occurs when abnormal cells in the skin grow uncontrollably. It is primarily classified into three main types: basal cell carcinoma, squamous cell carcinoma, and melanoma.</h4>
+                    <p class="mb-4">Skin cancer can have significant impacts on health and quality of life. Early detection and treatment are crucial for effective management and improving outcomes. Understanding the risk factors, symptoms, and preventive measures can help reduce the incidence of skin cancer and promote overall skin health.</p>
+                    <div class="row g-3">
+                        
+                    </div>
+                    
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s" src="/static/img/real.png" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+    
+
+
+    <!-- Appointment Start -->
+   
+    <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp position-relative"
+    style="background-position: center; background-size: cover;" data-wow-delay="0.1s">
+
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+        <source src="/static/videoplayback.mp4" type="video/mp4"> <!-- Add your video source -->
+        Your browser does not support the video tag.
+    </video>
+
+    
+
+
+  
+
+
+
+    {% endif %}
+
+
+    <!-- Back to Top -->
+    {% if user.is_authenticated %}
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+    {% endif %}
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <script src="{% static 'lib/twentytwenty/jquery.event.move.js' %}"></script>
+    <script src="{% static 'lib/twentytwenty/jquery.twentytwenty.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

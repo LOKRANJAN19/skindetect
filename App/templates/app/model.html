@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Implementation</title>
+    <style>
+       /* Global Styles */
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+}
+
+
+
+/* Container Styles */
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Main Box Styles */
+.box {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 12px 24px rgb(240, 236, 236);
+    overflow-y: auto;
+    max-height: 80vh;
+    backdrop-filter: blur(8px);
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #333;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1:after {
+    content: "";
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    border-radius: 4px;
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+/* File Upload Styles */
+.kwt-file__drop-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.kwt-file__drop-area.is-active {
+    background-color: #e0f7fa;
+}
+
+.kwt-file__choose-file {
+    flex-shrink: 0;
+    background-color: #00796b;
+    border-radius: 50%;
+    margin-right: 15px;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image Styles */
+.img {
+    text-align: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.img img {
+    max-width: 100%;
+    height: auto;
+    max-height: 250px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.img img:hover {
+    transform: scale(1.05);
+}
+
+/* Button Styles */
+.bb {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.but {
+    background-color: #d47100;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.but:hover {
+    background-color: #0097a7;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box">
+            <a href="/" style="color: #1d3557; font-size: 20px;text-decoration: solid;"><b>HOME</b></a>
+            <h1>Skin Disease Implementation</h1>
+            <h3>Drop File Upload</h3>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                
+                <div class="bb"><button class="but" type="submit">SUBMIT</button></div><br><br>
+            </form>
+
+            {% if obj %}
+                <code style="font-size: 20px;">{{ output | upper }}</code><br><br><br>
+
+                <div class="img">
+                    <img src="{{ obj.image.url }}" alt="No image found">
+                </div>
+                <div class="img">
+                    <img src="{{ image_uri }}" alt="No image found">
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+</body>
+</html>
+
+    

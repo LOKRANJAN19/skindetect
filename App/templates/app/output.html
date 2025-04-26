@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
+		<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+		ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+    
+    <style>
+        /* General Body Styling */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: #6992bb; /* Fallback color */
+    background-size: cover;
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    color: #333;
+}
+
+/* Image Container Styling */
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.image-container img {
+    border-radius: 15px; /* Rounded corners for the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Card Container Styling */
+.card-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Card Title Styling */
+.card-title {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* Container Styling */
+.container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: #007bff;
+    color: white;
+}
+
+table td ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: disc;
+    margin-left: 20px;
+}
+h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .image-container img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+    
+        <nav class="fixed bg-white w-full z-10 border-b border-solid border-gray-300">
+          <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="navbar-brand p-0">
+                <h1 class="m-0 text-primary"> </h1>
+            </a>
+            <div class="block md:hidden">
+              <button class="flex items-center px-3 py-2 border rounded text-gray-500 boder-gray-600 hiver:text-gray-800">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://wwww.w3.org/2000/svg">
+                  <title>Menu</title>
+                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+              </button>
+            </div>
+            <div class="hidden md:block">
+              <ul class="inline-flex">
+                <li>
+                  <a href="/" class="px-4 font-bold hover:text-gray-800">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'users-profile' %}" class="px-4 font-bold hover:text-gray-800">
+                    Profile
+                  </a>
+                </li> 
+                <li>
+                  <a href="{% url 'model' %}" class="px-4 font-bold hover:text-gray-800">
+                    Model
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'Database' %}" class="px-4 font-bold hover:text-gray-800">
+                    Model Database
+                  </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>  
+                    <a href="{% url 'logout_view' %}" class=" hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                        </svg>
+                    </a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <nav>
+            {% if obj %}<br><br><br><br>
+        
+          <div class="image-container">
+            <center> <img src="{{ obj.image.url }}" alt="Colon Adenocarcinoma Image" class="rounded-xl" style="width: 250px; height: 250px;"><br><br>
+                <div class="card-container">
+                    <p class="card-title" style="color: white;">{{ predict1 | upper }}</p>
+                </div></center>
+            </div>
+            <div class="container">
+                {% if predict == 'actinic_keratosis_disease' %}
+                <h1  >Actinic Keratosis Information</h1>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Actinic keratosis (AK) is a precancerous skin condition characterized by rough, scaly patches on sun-exposed skin. It is caused by long-term sun exposure.</td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Rough, scaly patches on the skin</li>
+                                <li>Redness or inflammation</li>
+                                <li>Itching or tenderness</li>
+                                <li>Bleeding or oozing in advanced cases</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            <ul>
+                                <li>Prolonged sun exposure</li>
+                                <li>Tanning beds</li>
+                                <li>History of sunburns</li>
+                                <li>Fair skin type</li>
+                                <li>Age (more common in older adults)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Use sunscreen with high SPF</li>
+                                <li>Wear protective clothing</li>
+                                <li>Avoid tanning beds</li>
+                                <li>Seek shade during peak sunlight hours</li>
+                                <li>Regular skin check-ups</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Regularly inspect your skin for changes</li>
+                                <li>Avoid excessive sun exposure</li>
+                                <li>Use broad-spectrum sunscreen</li>
+                                <li>Be cautious with medications that increase sun sensitivity</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li>Cryotherapy (freezing the lesion)</li>
+                                <li>Topical medications (e.g., 5-fluorouracil, imiquimod)</li>
+                                <li>Laser therapy</li>
+                                <li>Curettage (scraping the lesion)</li>
+                                <li>Photodynamic therapy</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                
+                {% elif predict == 'athlete_foot' %}
+                <h1>Athlete's Foot Information</h1>
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Athlete's foot is a fungal infection of the skin on the feet, often caused by fungi in the genus <i>Trichophyton</i>. It typically affects the skin between the toes and on the soles of the feet, leading to itching, burning, and discomfort.</td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            <ul>
+                                <li>Fungal infections, mainly from <i>Trichophyton</i> species.</li>
+                                <li>Walking barefoot in damp, communal areas like pools or locker rooms.</li>
+                                <li>Wearing tight or non-breathable footwear.</li>
+                                <li>Sharing personal items like towels.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Itching, burning, or stinging between the toes.</li>
+                                <li>Red, scaly, or cracked skin.</li>
+                                <li>Dry, peeling skin on the soles or sides of the feet.</li>
+                                <li>Blisters or ulcers in severe cases.</li>
+                                <li>Unpleasant foot odor.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Keep feet clean and dry.</li>
+                                <li>Use antifungal powders or sprays regularly.</li>
+                                <li>Avoid walking barefoot in public areas.</li>
+                                <li>Wear breathable, well-ventilated footwear.</li>
+                                <li>Change socks and shoes frequently.</li>
+                                <li>Avoid sharing personal items.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Treat athlete's foot promptly to prevent spreading.</li>
+                                <li>Disinfect footwear and socks regularly.</li>
+                                <li>Use personal towels and avoid sharing.</li>
+                                <li>Avoid touching other areas of the body after touching infected areas.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li>Over-the-counter antifungal creams, powders, or sprays (e.g., clotrimazole, terbinafine).</li>
+                                <li>Prescription antifungal medications for severe cases.</li>
+                                <li>Keeping feet dry and clean.</li>
+                                <li>Avoiding occlusive footwear during treatment.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                    
+                {% elif predict == 'basal_cell_carcinoma_disease' %}
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Basal cell carcinoma (BCC) is a type of skin cancer that begins in the basal cells, which produce new skin cells as old ones die. It often appears as a slightly transparent bump on the skin, though it can take other forms. BCC is slow-growing and rarely spreads to other parts of the body.</td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            - Use sunscreen with at least SPF 30 every day.<br>
+                            - Avoid tanning beds.<br>
+                            - Wear protective clothing (hats, sunglasses, etc.).<br>
+                            - Stay in the shade during peak sun hours (10 AM to 4 PM).<br>
+                            - Regularly check your skin for new growths or changes in existing moles or spots.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precaution</td>
+                        <td>
+                            - Avoid prolonged sun exposure.<br>
+                            - Apply sunscreen generously and frequently.<br>
+                            - Cover up with UV-protective clothing.<br>
+                            - Perform regular self-examinations for any skin changes.<br>
+                            - Schedule annual skin check-ups with a dermatologist.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            - A pearly or waxy bump on the face, ears, or neck.<br>
+                            - A flat, flesh-colored or brown scar-like lesion.<br>
+                            - A bleeding or scabbing sore that heals and returns.<br>
+                            - Red or irritated patches of skin that may itch or hurt.<br>
+                            - A shiny, skin-colored nodule.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            - Prolonged exposure to ultraviolet (UV) radiation from sunlight or tanning beds.<br>
+                            - Fair skin or light-colored eyes.<br>
+                            - Family history of skin cancer.<br>
+                            - Age (most common in people over 50).<br>
+                            - Compromised immune system.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            - Surgical Removal: Excision or Mohs surgery to remove the tumor.<br>
+                            - Topical Medications: Creams like imiquimod or fluorouracil for small, superficial BCC.<br>
+                            - Cryotherapy: Freezing off the cancer cells.<br>
+                            - Radiation Therapy: For larger or deeper tumors when surgery is not an option.<br>
+                            - Targeted Therapy: Drugs for advanced cases where surgery is not possible.
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'cellulitis' %}
+                <h2>Cellulitis Information Table</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Cellulitis is a common bacterial skin infection that affects the deeper layers of the skin, including the dermis and subcutaneous tissues. It causes redness, swelling, heat, and pain in the affected area, often accompanied by fever. If left untreated, it can spread and lead to serious health complications.</td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>Keep skin clean and moisturized.</li>
+                                    <li>Promptly treat and cover wounds.</li>
+                                    <li>Avoid scratching or irritating insect bites or skin lesions.</li>
+                                    <li>Maintain good hygiene.</li>
+                                    <li>Wear protective clothing if engaging in activities that may cause skin injuries.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precaution</td>
+                            <td>
+                                <ul>
+                                    <li>Wash your hands regularly.</li>
+                                    <li>Use antibacterial ointment on cuts or abrasions.</li>
+                                    <li>Avoid sharing personal items such as towels or razors.</li>
+                                    <li>Ensure proper foot care, especially if diabetic.</li>
+                                    <li>Seek medical attention if wounds show signs of infection (redness, swelling, or pus).</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>Red, swollen skin that feels warm to the touch.</li>
+                                    <li>Tenderness and pain in the affected area.</li>
+                                    <li>Fever, chills, or malaise.</li>
+                                    <li>Red streaks spreading from the infected area.</li>
+                                    <li>Swollen lymph nodes.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>Bacterial infection, primarily by <i>Staphylococcus</i> or <i>Streptococcus</i> bacteria.</li>
+                                    <li>Skin injuries such as cuts, burns, or insect bites.</li>
+                                    <li>Weakened immune system.</li>
+                                    <li>Skin conditions (e.g., eczema, athlete's foot).</li>
+                                    <li>Surgical wounds or injections.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Antibiotics (oral or IV, depending on severity).</li>
+                                    <li>Pain relievers (e.g., ibuprofen) for discomfort.</li>
+                                    <li>Elevation of the affected limb to reduce swelling.</li>
+                                    <li>Warm compresses to alleviate pain.</li>
+                                    <li>Hospitalization for severe cases or if infection spreads to other areas (e.g., blood or organs).</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'cutaneous_larva_migrans_disease' %}
+                <h1>Cutaneous Larva Migrans Disease Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Cutaneous larva migrans is a skin condition caused by the migration of hookworm larvae through the skin. It usually results from contact with contaminated soil or sand, typically in tropical and subtropical regions. The larvae migrate beneath the skin, causing itchy, red, and winding tracks.</td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>Avoid walking barefoot on sandy or soil areas in tropical regions.</li>
+                                    <li>Use protective footwear and clothing when in contact with soil.</li>
+                                    <li>Ensure proper sanitation and avoid direct contact with contaminated soil.</li>
+                                    <li>Maintain good personal hygiene and avoid contact with fecal matter.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                <ul>
+                                    <li>Seek immediate medical attention if symptoms appear after traveling to an endemic area.</li>
+                                    <li>Apply insect repellents and use appropriate barriers when traveling to regions where the disease is common.</li>
+                                    <li>Regularly check for and treat any skin infections or lesions.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>Itchy, red, and winding rash on the skin.</li>
+                                    <li>Raised, serpiginous (winding) tracks that may change over time.</li>
+                                    <li>Swelling and inflammation around the affected area.</li>
+                                    <li>Possible secondary bacterial infections due to scratching.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>Infection with hookworm larvae, specifically Ancylostoma braziliensis and Ancylostoma caninum.</li>
+                                    <li>Larvae penetrate the skin from contaminated soil or sand, usually in tropical and subtropical regions.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Oral antiparasitic medications such as albendazole or ivermectin.</li>
+                                    <li>Topical corticosteroids to reduce inflammation and itching.</li>
+                                    <li>Keeping the affected area clean and dry.</li>
+                                    <li>Antibiotics may be prescribed if there is a secondary bacterial infection.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'dermatofibroma_disease' %}
+                <h2>Dermatofibroma Information</h2>
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Dermatofibromas are benign skin tumors that usually appear as small, firm nodules on the skin. They are typically brownish in color and may feel like a hard lump. They are composed of fibrous tissue and are generally harmless.</td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Small, firm nodules on the skin (usually on arms, legs, or trunk)</li>
+                                <li>May be brownish or tan</li>
+                                <li>Typically asymptomatic but can sometimes itch or be tender</li>
+                                <li>May cause a noticeable bump on the skin</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>The exact cause is unknown, but dermatofibromas may develop due to skin trauma or injuries. They can occur spontaneously without any known triggers.</td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>There are no known ways to prevent dermatofibromas since their exact cause is unclear. Avoiding unnecessary skin trauma and injuries might reduce the risk.</td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Avoid scratching or picking at skin lesions</li>
+                                <li>Protect the skin from excessive sun exposure</li>
+                                <li>If a new or changing skin lesion is noticed, consult a dermatologist for evaluation</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li>Observation: Often, no treatment is needed if the dermatofibroma is asymptomatic</li>
+                                <li>Excision: Surgical removal is an option if the lesion is bothersome, painful, or for cosmetic reasons</li>
+                                <li>Cryotherapy: Freezing with liquid nitrogen can be used to remove the lesion in some cases</li>
+                                <li>Laser Therapy: May be used to reduce the appearance of the lesion</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'Healthy_skin' %}
+                <table>
+                    <caption>Healthy Skin Description</caption>
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Color</td>
+                            <td>Even skin tone without discoloration or blemishes.</td>
+                        </tr>
+                        <tr>
+                            <td>Texture</td>
+                            <td>Smooth and soft to the touch, free from rough patches or flakiness.</td>
+                        </tr>
+                        <tr>
+                            <td>Hydration</td>
+                            <td>Well-hydrated with no signs of dryness or excessive oiliness.</td>
+                        </tr>
+                        <tr>
+                            <td>Elasticity</td>
+                            <td>Maintains its shape and recovers quickly when stretched.</td>
+                        </tr>
+                        <tr>
+                            <td>Clarity</td>
+                            <td>Clear of visible pores, acne, or other imperfections.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'HFMD_disease' %}
+                <h1>Hand, Foot, and Mouth Disease (HFMD)</h1>
+                <table>
+                    <caption>HFMD Information</caption>
+                    <tr>
+                        <th>Category</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Hand, Foot, and Mouth Disease (HFMD) is a common viral illness primarily affecting young children, characterized by fever, mouth sores, and a rash on the hands and feet. It is caused by several types of enteroviruses, most commonly the Coxsackievirus.</td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Practice good hand hygiene by washing hands frequently with soap and water.</li>
+                                <li>Avoid close contact with infected individuals.</li>
+                                <li>Disinfect frequently touched surfaces and toys.</li>
+                                <li>Avoid touching the face with unwashed hands.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precaution</td>
+                        <td>
+                            <ul>
+                                <li>Avoid attending childcare centers or schools while symptomatic to prevent spreading the disease.</li>
+                                <li>Ensure that infected individuals stay home until they are fever-free and symptoms have improved.</li>
+                                <li>Keep personal items like towels and utensils separate.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Fever</li>
+                                <li>Sore throat</li>
+                                <li>Mouth sores (painful red spots that can develop into ulcers)</li>
+                                <li>Rash on hands, feet, and sometimes buttocks</li>
+                                <li>Loss of appetite</li>
+                                <li>General malaise and irritability</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            <ul>
+                                <li>HFMD is caused by enteroviruses, most commonly the Coxsackievirus A16 and, less frequently, enterovirus 71.</li>
+                                <li>The virus spreads through close contact with an infected person, via respiratory droplets, and by touching contaminated surfaces.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li>There is no specific antiviral treatment for HFMD.</li>
+                                <li>Symptomatic treatment includes pain relievers (e.g., acetaminophen or ibuprofen) and plenty of fluids to stay hydrated.</li>
+                                <li>Mouth sores can be soothed with over-the-counter numbing gels.</li>
+                                <li>Maintain good hygiene to prevent secondary infections.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'impetigo' %}
+                <h1>Impetigo Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Impetigo is a highly contagious bacterial skin infection that primarily affects young children but can occur in people of any age. It is characterized by red sores or blisters that can rupture, ooze, and form a yellow-brown crust. The infection is often caused by Staphylococcus aureus or Streptococcus pyogenes.</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>Red sores or blisters on the face, especially around the nose and mouth</li>
+                                    <li>Sores that rupture, ooze, and form a yellow-brown crust</li>
+                                    <li>Itching and discomfort</li>
+                                    <li>Swollen lymph nodes in severe cases</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>Bacterial infection, commonly due to Staphylococcus aureus or Streptococcus pyogenes</li>
+                                    <li>Spread through direct contact with infected skin or contaminated objects</li>
+                                    <li>Can occur following cuts, insect bites, or other skin injuries</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>Maintain good personal hygiene</li>
+                                    <li>Avoid close contact with infected individuals</li>
+                                    <li>Keep wounds clean and covered</li>
+                                    <li>Avoid sharing personal items such as towels or clothing</li>
+                                    <li>Regular hand washing</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                <ul>
+                                    <li>Wash and disinfect any contaminated surfaces or objects</li>
+                                    <li>Avoid scratching or touching the infected area</li>
+                                    <li>Follow prescribed treatment regimen fully</li>
+                                    <li>Stay home from school or daycare until no longer contagious</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Topical antibiotics: Applied directly to the affected skin (e.g., mupirocin)</li>
+                                    <li>Oral antibiotics: For more severe cases or widespread infection (e.g., penicillin, cephalexin)</li>
+                                    <li>Cleaning the area: Gently wash the infected skin with soap and water</li>
+                                    <li>Avoid scratching: To prevent spreading the infection</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'melanoma_cancer' %}
+                <h1>Melanoma Skin Cancer Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Melanoma is a type of skin cancer that develops in melanocytes, the cells responsible for producing melanin, the pigment that gives skin its color. It can occur in any part of the body, including areas not exposed to the sun. Melanoma is known for its potential to spread to other parts of the body if not detected early.</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>New or changing moles or skin lesions</li>
+                                    <li>Changes in the color, shape, or size of an existing mole</li>
+                                    <li>Itchy or bleeding moles</li>
+                                    <li>Dark streaks under the nails or in the mouth</li>
+                                    <li>Sores that do not heal</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>Excessive UV radiation exposure from sunlight or tanning beds</li>
+                                    <li>Genetic factors or family history of melanoma</li>
+                                    <li>Having a large number of moles or unusual moles</li>
+                                    <li>Fair skin, light hair, and blue or green eyes</li>
+                                    <li>Weakened immune system</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>Use sunscreen with high SPF and broad-spectrum protection</li>
+                                    <li>Avoid tanning beds and excessive sun exposure</li>
+                                    <li>Wear protective clothing, hats, and sunglasses</li>
+                                    <li>Regularly check your skin for new or changing moles</li>
+                                    <li>Get regular skin exams by a dermatologist</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                <ul>
+                                    <li>Avoid direct sun exposure during peak hours (10 AM to 4 PM)</li>
+                                    <li>Reapply sunscreen every two hours, or after swimming or sweating</li>
+                                    <li>Be cautious with reflective surfaces like water, sand, or snow that can intensify UV exposure</li>
+                                    <li>Educate yourself about the signs of skin cancer and take action if you notice any changes</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Surgical removal of the melanoma and some surrounding tissue</li>
+                                    <li>Immunotherapy to stimulate the body's immune system to fight cancer</li>
+                                    <li>Targeted therapy to target specific genetic mutations in cancer cells</li>
+                                    <li>Chemotherapy for advanced cases</li>
+                                    <li>Radiation therapy in certain cases</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'nail_fungus' %}
+                <h1>Nail Fungus (Onychomycosis) Information</h1>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Nail fungus, or onychomycosis, is a fungal infection that affects the nails, commonly caused by dermatophytes, yeasts, or molds. It leads to changes in the appearance and texture of the nails.</td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Keep nails clean and dry.</li>
+                                <li>Avoid walking barefoot in public places.</li>
+                                <li>Use antifungal sprays or powders in communal areas like gyms or pools.</li>
+                                <li>Wear breathable shoes and socks.</li>
+                                <li>Avoid sharing nail clippers or other personal items.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Regularly inspect your nails for any signs of infection.</li>
+                                <li>Treat any cuts or injuries promptly.</li>
+                                <li>Consult a healthcare professional if you notice persistent symptoms.</li>
+                                <li>Avoid using nail polish or artificial nails if you have an infection.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Discoloration of the nail (yellow, white, or brown).</li>
+                                <li>Thickening of the nail.</li>
+                                <li>Crumbling or brittle nails.</li>
+                                <li>Distorted nail shape.</li>
+                                <li>Foul odor from the infected nail.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            <ul>
+                                <li>Fungal organisms (dermatophytes, yeasts, molds).</li>
+                                <li>Poor hygiene.</li>
+                                <li>Excessive moisture exposure.</li>
+                                <li>Weakened immune system.</li>
+                                <li>Diabetes or other health conditions.</li>
+                                <li>Injuries to the nail.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li><strong>Topical Antifungals:</strong> Creams, lotions, or nail lacquers (e.g., ciclopirox, efinaconazole).</li>
+                                <li><strong>Oral Antifungals:</strong> Prescription medications like terbinafine or itraconazole.</li>
+                                <li><strong>Home Remedies:</strong> Tea tree oil, vinegar, or hydrogen peroxide may help, but consult a doctor first.</li>
+                                <li><strong>Surgical Options:</strong> Removal of the affected nail in severe cases.</li>
+                                <li><strong>Laser Therapy:</strong> Emerging treatment option to target fungal infections.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'nevus_cancer' %}
+                <h1>Nevus Cancer (Skin) Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Nevus cancer, commonly referred to as melanoma, is a type of skin cancer that develops from melanocytes, the pigment-producing cells in the skin. It can be aggressive and spread to other parts of the body if not detected and treated early.</td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>Use broad-spectrum sunscreen with SPF 30 or higher.</li>
+                                    <li>Wear protective clothing and hats.</li>
+                                    <li>Avoid excessive sun exposure, especially during peak hours.</li>
+                                    <li>Avoid tanning beds.</li>
+                                    <li>Regularly check your skin for any new or changing moles.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precaution</td>
+                            <td>
+                                <ul>
+                                    <li>Get regular skin exams by a dermatologist.</li>
+                                    <li>Follow sun safety practices consistently.</li>
+                                    <li>Educate yourself and others about the risks of skin cancer.</li>
+                                    <li>Be cautious with medications and products that may increase skin sensitivity to sunlight.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>New or changing moles or spots on the skin.</li>
+                                    <li>Itching, tenderness, or pain in a mole.</li>
+                                    <li>Bleeding or oozing from a mole.</li>
+                                    <li>Changes in the color or size of a mole.</li>
+                                    <li>Irregular borders or asymmetry in moles.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>Excessive exposure to ultraviolet (UV) radiation from the sun or tanning beds.</li>
+                                    <li>Family history of melanoma or other skin cancers.</li>
+                                    <li>Having a large number of moles or unusual moles.</li>
+                                    <li>Fair skin that burns easily.</li>
+                                    <li>A weakened immune system.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li><strong>Surgery:</strong> Removing the cancerous tissue through excision.</li>
+                                    <li><strong>Radiation Therapy:</strong> Targeted high-energy rays to kill cancer cells.</li>
+                                    <li><strong>Chemotherapy:</strong> Systemic treatment using drugs to kill cancer cells.</li>
+                                    <li><strong>Immunotherapy:</strong> Boosting the body's immune system to fight cancer.</li>
+                                    <li><strong>Targeted Therapy:</strong> Using drugs that specifically target cancer cells with certain genetic mutations.</li>
+                                    <li><strong>Clinical Trials:</strong> Participation in experimental treatments.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'PSORIASIS_disease' %}
+                <h1>Psoriasis Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Psoriasis is a chronic autoimmune skin condition characterized by rapid skin cell turnover. This results in thick, red, scaly patches on the skin, which can be itchy and sometimes painful. It often affects areas such as the scalp, elbows, knees, and lower back.</td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>While psoriasis cannot be entirely prevented, the following steps may help reduce flare-ups:<br>
+                            - Maintain a healthy weight<br>
+                            - Avoid smoking and excessive alcohol consumption<br>
+                            - Follow a balanced diet<br>
+                            - Manage stress<br>
+                            - Avoid skin injuries and infections</td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>- Use mild, non-irritating skin products<br>
+                            - Avoid harsh soaps and skin care products<br>
+                            - Protect your skin from excessive sun exposure<br>
+                            - Use moisturizers regularly<br>
+                            - Follow your healthcare provider's advice regarding treatment and medication</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>- Red, inflamed skin patches<br>
+                            - Silvery-white scales on the skin<br>
+                            - Dry, cracked skin that may bleed<br>
+                            - Itching, burning, or soreness<br>
+                            - Thickened or ridged nails<br>
+                            - Swollen and stiff joints (in cases of psoriatic arthritis)</td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>The exact cause of psoriasis is not fully understood, but it is believed to involve a combination of genetic and environmental factors. Key factors include:<br>
+                            - Genetic predisposition<br>
+                            - Immune system dysfunction<br>
+                            - Triggers such as stress, infections, or injury to the skin</td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>- Topical treatments (e.g., corticosteroids, vitamin D analogues)<br>
+                            - Phototherapy (exposure to ultraviolet light)<br>
+                            - Systemic medications (e.g., methotrexate, biologics)<br>
+                            - Lifestyle changes (e.g., diet, stress management)<br>
+                            - Moisturizers and emollients to manage symptoms and prevent dryness</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'ringworm' %}
+                <h1>Ringworm (Skin) Information</h1>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Ringworm, also known as tinea, is a fungal infection of the skin, hair, or nails. It appears as a ring-shaped rash with a red, scaly border and clear center. Despite the name, it is not caused by worms.</td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>Ringworm is caused by various types of fungi known as dermatophytes. These fungi thrive in warm, moist environments and can be transmitted through direct skin-to-skin contact or by touching contaminated objects like towels, clothing, or surfaces.</td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Ring-shaped, red, scaly rash with clear center</li>
+                                <li>Itching and discomfort</li>
+                                <li>Hair loss in infected areas (if scalp is affected)</li>
+                                <li>Cracked or peeling skin</li>
+                                <li>Thickened or discolored nails (if nails are affected)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Maintain good personal hygiene.</li>
+                                <li>Keep skin clean and dry.</li>
+                                <li>Avoid sharing personal items like towels, combs, or clothing.</li>
+                                <li>Wear breathable, moisture-wicking clothing.</li>
+                                <li>Avoid walking barefoot in communal areas like gyms or pools.</li>
+                                <li>Disinfect surfaces and objects that may be contaminated.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Treat all infected pets, as they can be carriers.</li>
+                                <li>Avoid direct contact with infected individuals.</li>
+                                <li>Wash hands frequently and thoroughly.</li>
+                                <li>Use antifungal powders or sprays in areas prone to infection.</li>
+                                <li>Avoid scratching the affected areas to prevent spreading the infection.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li>Over-the-counter antifungal creams or ointments (e.g., clotrimazole, miconazole, terbinafine).</li>
+                                <li>Prescription oral antifungal medications for severe or persistent cases.</li>
+                                <li>Keep the affected area clean and dry.</li>
+                                <li>Follow the full course of treatment as prescribed by a healthcare professional.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'Rosacea' %}
+                <h1>Rosacea Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Rosacea is a chronic skin condition characterized by facial redness, visible blood vessels, and, in some cases, acne-like breakouts. It commonly affects the central face, including the cheeks, nose, and forehead. The exact cause is unknown, but it is thought to be related to genetics and environmental factors.</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>Persistent facial redness</li>
+                                    <li>Visible blood vessels (telangiectasia)</li>
+                                    <li>Red, swollen bumps and pimples</li>
+                                    <li>Dry, flaky skin</li>
+                                    <li>Burning or stinging sensation</li>
+                                    <li>Thickening of the skin (rhinophyma, in severe cases)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>Genetic predisposition</li>
+                                    <li>Abnormalities in facial blood vessels</li>
+                                    <li>Immune system issues</li>
+                                    <li>Environmental factors (sun exposure, hot beverages, spicy foods)</li>
+                                    <li>Certain medications and topical treatments</li>
+                                    <li>Demodex mites or other skin microorganisms</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>Use sunscreen daily to protect against UV rays</li>
+                                    <li>Avoid known triggers (spicy foods, hot drinks, alcohol)</li>
+                                    <li>Maintain a gentle skincare routine</li>
+                                    <li>Avoid harsh skincare products</li>
+                                    <li>Manage stress levels</li>
+                                    <li>Use hypoallergenic and non-irritating skin care products</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                <ul>
+                                    <li>Avoiding excessive sun exposure</li>
+                                    <li>Using broad-spectrum sunscreen with SPF 30 or higher</li>
+                                    <li>Steering clear of known irritants and triggers</li>
+                                    <li>Consulting a dermatologist for personalized advice and treatment options</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Topical medications (e.g., metronidazole, azelaic acid)</li>
+                                    <li>Oral antibiotics (e.g., tetracycline, doxycycline) for severe cases</li>
+                                    <li>Laser therapy to reduce redness and visible blood vessels</li>
+                                    <li>Avoidance of triggers and irritants</li>
+                                    <li>Use of gentle skincare products</li>
+                                    <li>Regular follow-up with a dermatologist</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'seborrheic_keratosis' %}
+                <h1>Seborrheic Keratosis Information</h1>
+                <table>
+                    <caption>Details of Seborrheic Keratosis</caption>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Seborrheic keratosis is a common, benign skin growth that typically appears as a raised, wart-like lesion. It varies in color from light tan to black and has a rough, scaly surface. It is generally harmless and often found in older adults.</td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>Raised, waxy, or scaly growths on the skin</li>
+                                    <li>Varied colors, including brown, black, or tan</li>
+                                    <li>Often itchy or irritating</li>
+                                    <li>Usually appears on the face, chest, shoulders, or back</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>The exact cause is unknown, but it is believed to be related to genetic factors</li>
+                                    <li>More common with aging</li>
+                                    <li>Not linked to sun exposure or skin damage</li>
+                                    <li>May have a hereditary component</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                <ul>
+                                    <li>There is no known way to prevent seborrheic keratosis</li>
+                                    <li>Regular skin checks for early detection</li>
+                                    <li>Protecting skin from excessive sun exposure may help maintain overall skin health</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                <ul>
+                                    <li>Avoid picking or scratching the lesions to prevent irritation or infection</li>
+                                    <li>Monitor for changes in size, shape, or color, which may indicate a need for further evaluation</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Generally, no treatment is necessary if the growths are not causing discomfort or cosmetic concerns</li>
+                                    <li>Options for removal include cryotherapy (freezing), curettage (scraping), laser therapy, and electrosurgery (burning)</li>
+                                    <li>Consult a dermatologist for appropriate treatment based on individual cases</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'shingles_disease' %}
+                <h1>Shingles Disease Information</h1>
+
+                <table>
+                    <caption>Shingles Overview</caption>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>Shingles is a viral infection caused by the varicella-zoster virus, the same virus that causes chickenpox. It leads to a painful rash with blisters, usually on one side of the body.</td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Pain, burning, or tingling sensation in a specific area</li>
+                                <li>Red rash that develops into fluid-filled blisters</li>
+                                <li>Itching</li>
+                                <li>Fever and headache</li>
+                                <li>Fatigue</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            <ul>
+                                <li>Reactivation of the varicella-zoster virus in individuals who have previously had chickenpox</li>
+                                <li>Weakened immune system due to aging, stress, or other factors</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Get vaccinated with the shingles vaccine (Shingrix) if you are over 50 or have a weakened immune system</li>
+                                <li>Maintain a healthy immune system</li>
+                                <li>Avoid contact with people with active shingles who have not had chickenpox</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Keep the rash covered to prevent spreading the virus</li>
+                                <li>Avoid contact with pregnant women who have never had chickenpox or the chickenpox vaccine</li>
+                                <li>Practice good hygiene to prevent secondary bacterial infections</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li>Antiviral medications (e.g., acyclovir, valacyclovir, famciclovir) to reduce the severity and duration of symptoms</li>
+                                <li>Pain relief medications (e.g., acetaminophen, ibuprofen)</li>
+                                <li>Topical treatments to relieve itching</li>
+                                <li>Corticosteroids to reduce inflammation in severe cases</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'squamous_cell_carcinoma_cancer' %}
+                <h1>Squamous Cell Carcinoma Information</h1>
+
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            Squamous cell carcinoma (SCC) is a type of skin cancer that originates in the squamous cells, which are found in the outer layer of the skin. SCC usually appears as a red, scaly patch, a sore that doesn’t heal, or a growth with a central depression. It can also develop in other areas like the mouth or throat.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Symptoms</td>
+                        <td>
+                            <ul>
+                                <li>Red, scaly patches on the skin</li>
+                                <li>Open sores that don’t heal</li>
+                                <li>Growths with a central depression</li>
+                                <li>Changes in existing moles or skin lesions</li>
+                                <li>Itchy or painful skin in the affected area</li>
+                                <li>Bleeding or oozing from skin lesions</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Causes</td>
+                        <td>
+                            <ul>
+                                <li>Excessive exposure to ultraviolet (UV) radiation from the sun or tanning beds</li>
+                                <li>Skin type that is sensitive to sunlight</li>
+                                <li>Chronic skin inflammation or irritation</li>
+                                <li>Previous skin cancers</li>
+                                <li>Exposure to certain chemicals or carcinogens</li>
+                                <li>Weakened immune system</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prevention</td>
+                        <td>
+                            <ul>
+                                <li>Use sunscreen with a high SPF regularly</li>
+                                <li>Wear protective clothing and hats when exposed to the sun</li>
+                                <li>Avoid tanning beds</li>
+                                <li>Seek shade during peak sun hours</li>
+                                <li>Regularly check the skin for any changes or unusual spots</li>
+                                <li>Have regular skin exams by a dermatologist</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precautions</td>
+                        <td>
+                            <ul>
+                                <li>Limit sun exposure, especially between 10 a.m. and 4 p.m.</li>
+                                <li>Avoid direct sun exposure on sensitive skin areas</li>
+                                <li>Apply sunscreen generously and frequently</li>
+                                <li>Perform self-exams to detect early signs</li>
+                                <li>Use sun-blocking clothing and hats</li>
+                                <li>Avoid smoking, which can increase skin cancer risk</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Treatment</td>
+                        <td>
+                            <ul>
+                                <li><strong>Surgical Excision:</strong> Removing the cancerous tissue with a margin of healthy skin.</li>
+                                <li><strong>Mohs Surgery:</strong> A specialized surgery that removes cancerous skin layer by layer.</li>
+                                <li><strong>Cryotherapy:</strong> Freezing the cancerous cells with liquid nitrogen.</li>
+                                <li><strong>Electrosurgery:</strong> Using electrical currents to destroy cancer cells.</li>
+                                <li><strong>Radiation Therapy:</strong> Using high-energy rays to kill cancer cells.</li>
+                                <li><strong>Topical Chemotherapy:</strong> Applying chemotherapy creams to treat superficial SCC.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                    
+                {% elif predict == 'vascular_lesion_cancer' %}
+                <h1>Vascular Lesion Cancer (Skin) Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Vascular lesions in the skin are abnormal blood vessel formations or growths. They can appear as red, purple, or blue spots or patches and may be associated with skin cancer.</td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>
+                                - Avoid excessive sun exposure and use sunscreen.<br>
+                                - Wear protective clothing.<br>
+                                - Regularly check your skin for changes.<br>
+                                - Maintain a healthy lifestyle.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                - Get regular skin check-ups by a dermatologist.<br>
+                                - Be aware of any changes in existing lesions.<br>
+                                - Avoid using tanning beds.<br>
+                                - Follow your doctor’s advice for any identified lesions.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                - Red or purple spots or patches on the skin.<br>
+                                - Changes in the size, shape, or color of existing lesions.<br>
+                                - Bleeding or oozing from lesions.<br>
+                                - Pain or tenderness.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                - Exposure to UV radiation.<br>
+                                - Genetic predisposition.<br>
+                                - Chronic skin irritation or injury.<br>
+                                - Certain medications or conditions that affect blood vessels.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                - Topical treatments: Creams or ointments for less severe cases.<br>
+                                - Laser therapy: To reduce or remove visible lesions.<br>
+                                - Surgery: For removal of larger or deeper lesions.<br>
+                                - Cryotherapy: Freezing lesions to remove them.<br>
+                                - Radiation therapy: For cancerous lesions.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                {% elif predict == 'vitiligo_disease' %}
+                <h1>Vitiligo Disease Information</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Description</td>
+                            <td>Vitiligo is a long-term skin condition that causes patches of skin to lose their pigment, resulting in lighter skin areas. It occurs when the pigment-producing cells (melanocytes) are destroyed or stop functioning.</td>
+                        </tr>
+                        <tr>
+                            <td>Prevention</td>
+                            <td>While vitiligo cannot be prevented, maintaining a healthy immune system and protecting the skin from excessive sun exposure may help reduce the risk. Using sunscreen and avoiding harsh skin products can be beneficial.</td>
+                        </tr>
+                        <tr>
+                            <td>Precautions</td>
+                            <td>
+                                <ul>
+                                    <li>Use sunscreen to protect affected skin from sunburn and further discoloration.</li>
+                                    <li>Avoid skin trauma or irritation.</li>
+                                    <li>Consider using gentle skin care products.</li>
+                                    <li>Regular monitoring for skin changes.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Symptoms</td>
+                            <td>
+                                <ul>
+                                    <li>White or light-colored patches on the skin, usually in areas that are exposed to the sun, such as the hands, feet, arms, face, and lips.</li>
+                                    <li>The patches may gradually enlarge over time.</li>
+                                    <li>Premature whitening or graying of hair on the scalp, eyelashes, eyebrows, or beard.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Causes</td>
+                            <td>
+                                <ul>
+                                    <li>The exact cause is unknown, but it is thought to be an autoimmune response where the immune system attacks melanocytes.</li>
+                                    <li>Genetic factors may play a role.</li>
+                                    <li>Skin trauma or exposure to certain chemicals may trigger or worsen the condition.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Treatment</td>
+                            <td>
+                                <ul>
+                                    <li>Topical Corticosteroids: Creams or ointments to reduce inflammation and help restore pigment.</li>
+                                    <li>Topical Calcineurin Inhibitors: Medications to reduce immune response.</li>
+                                    <li>Phototherapy: Controlled exposure to ultraviolet light to stimulate pigment production.</li>
+                                    <li>Skin Grafting: Surgical procedure to replace affected skin with healthy skin from another part of the body.</li>
+                                    <li>Depigmentation Therapy: Lightening the remaining pigmented skin to match the affected areas.</li>
+                                    <li>Cosmetic Solutions: Use of makeup or self-tanners to even out skin tone.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                {% endif %}
+            
+
+                    
+
+{% endif %}
+
+
+</body>
+<script>
+    function changeBackgroundImage(imageUrl) {
+        document.body.style.backgroundImage = `url('${imageUrl}')`;
+    }
+
+    // Example usage: Change background image on page load or based on some event
+    window.onload = function() {
+        changeBackgroundImage('path-to-your-new-background-image.jpg');
+    };
+</script>
+
+
+
+
+</html>

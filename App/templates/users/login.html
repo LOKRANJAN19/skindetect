@@ -1,0 +1,144 @@
+{% load static %}
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+ 
+  .form-container {
+    width: 400px; /* Adjust width if needed */
+    padding: 40px;
+    border-radius: 50px; /* Adjust for smoother rounded edges */
+    box-shadow: 0 0 15px rgba(0, 1, 2, 0.1);
+    color: #348df3;
+    margin-left: 20px; /* Space between image and form */
+    border: 2px solid #348df3; /* Border width and color */
+}
+
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+    color: #0056b3; /* Darker blue for header */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  input {
+    padding: 12px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333; /* Darker text color */
+    background-color: #f9f9f9; /* Light background for inputs */
+  }
+
+  button {
+    padding: 10px;
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  a {
+    text-decoration: none;
+    color: #007bff; /* Blue link */
+    font-size: 18px;
+    transition: color 0.2s ease-in-out;
+  }
+
+  a:hover {
+    color: #0056b3; /* Darker blue on hover */
+  }
+
+  p {
+    text-align: center;
+    margin: 8px;
+  }
+
+  .alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid darksalmon;
+    background-color: #ffe5e5; /* Light red background */
+    color: darkred; /* Dark red text */
+    border-radius: 5px;
+  }
+
+  .alert .close {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+  }
+</style>
+
+<div class="container">
+  <div class="left-section"></div>
+  <div class="form-container" id="login-form">
+    <h1> Login</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {% if form.errors %}
+        <div class="alert" role="alert">
+          <div id="form_errors">
+            {% for key, value in form.errors.items %}
+              <strong>{{ value }}</strong>
+            {% endfor %}
+          </div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            &times;
+          </button>
+        </div>
+      {% endif %}
+      <label for="username">Username</label>
+      {{ form.username }}
+      <label for="password">Password</label>
+      {{ form.password }}
+      <button type="submit">Login</button>
+    </form>
+    <p style="color: white;">Don't have an account? <a href="{% url 'users-register' %}" id="signup-link" style="color: black;">Sign up</a></p>
+  </div>
+</div>
+
+<script>
+  // Wait for the DOM to load before running the script
+  document.addEventListener('DOMContentLoaded', function() {
+    // JavaScript code remains the same
+  });
+</script>
